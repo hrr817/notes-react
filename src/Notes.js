@@ -16,7 +16,7 @@ function Notes({notes, query, setTab, setCurrentNote}) {
     }
     
     return (
-        <div className="notes-container scroll">
+        <div className="notes-container scroll hide-scroll">
             {displayNotes()}
         </div>
     )

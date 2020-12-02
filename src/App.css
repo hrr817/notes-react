@@ -226,6 +226,15 @@ nav > .right > .search-container {
 }
 
 /* Custom ScrollBar */
+
+.hide-scroll {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .scroll::-webkit-scrollbar {
   width: 6px;
 }
