@@ -11,3 +11,6 @@ The notes and tasks is saved in browser's local storage.
 It uses Dictionary API, to get the meaning for the word.
 When viewing note, click on any word to get its meaning.
 
+# Netlify Deploy
+https://5fc744f64b9e2710f9d30af8--practical-aryabhata-b00d73.netlify.app/
+
