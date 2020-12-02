@@ -27,7 +27,7 @@ function App() {
  
   const [notes, setNotes] = useState(data.NotesData)
   const [tasks, setTasks] = useState(data.TasksData)
-
+  
   const [tab, changeTab] = useState((data.tab === "NOTES-CONTAINER" || data.tab === "TASKS-CONTAINER")? data.tab : 'NOTES-CONTAINER')
   const [text, changeText] = useState('')
   const [query, changeQuery] = useState('')
@@ -64,15 +64,15 @@ function App() {
   }
   
   return (
-          <div className="app-grid">
-            <Navbar query={query} currentNote={currentNote} notes={notes} showSearch={showSearch} 
-            tab={tab} text={text} setCurrentNote={setCurrentNote} setNotes={setNotes} setSearch={setSearch} 
-            setTab={setTab} setText={setText} setQuery={setQuery}/>
-            <section> {showTab()} </section>
-            <FloatButton tab={tab} floatWindow={floatWindow} 
-              setTab={setTab} setCurrentNote={setCurrentNote} 
-              setText={setText} setFloatWindow={setFloatWindow}/>
-          </div>
+    <div className="app-grid">
+      <Navbar query={query} currentNote={currentNote} notes={notes} showSearch={showSearch} 
+      tab={tab} text={text} setCurrentNote={setCurrentNote} setNotes={setNotes} setSearch={setSearch} 
+      setTab={setTab} setText={setText} setQuery={setQuery}/>
+      <section> {showTab()} </section>
+      <FloatButton tab={tab} floatWindow={floatWindow} 
+        setTab={setTab} setCurrentNote={setCurrentNote} 
+        setText={setText} setFloatWindow={setFloatWindow}/>
+    </div>  
   );
 }
 
