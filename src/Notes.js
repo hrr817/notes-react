@@ -1,7 +1,7 @@
 import React from 'react'
 import NoteBox from './Component/NoteBox'
 
-function Notes({notes, query, deletePhase, setNotes, setTab, setCurrentNote, setDeletePhase}) {
+function Notes({notes, query, setTab, setCurrentNote}) {
 
     const displayNotes = () => {
         if(notes.length === 0) {
@@ -10,15 +10,13 @@ function Notes({notes, query, deletePhase, setNotes, setTab, setCurrentNote, set
             const temp = [...notes]
             const show = temp.filter(item => (item.text.toLowerCase().search(query.toLowerCase()) !== -1) && item )
             return show.reverse().map(data => 
-            <NoteBox key={data.id} data={data} notes={notes}
-            deletePhase={deletePhase}  setNotes={setNotes} 
-            setTab={setTab} setCurrentNote={setCurrentNote} 
-            setDeletePhase={setDeletePhase}/>)
+            <NoteBox key={data.id} data={data} 
+            setTab={setTab} setCurrentNote={setCurrentNote} />)
         }
     }
     
     return (
-        <div className="notes-container scroll">
+        <div className="notes-container scroll hide-scroll">
             {displayNotes()}
         </div>
     )

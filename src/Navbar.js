@@ -14,9 +14,8 @@ import TrashSVG from './svg/trash.svg'
 import SaveSVG from './svg/save.svg'
 import EditSVG from './svg/edit.svg'
 import CloseSVG from './svg/close.svg'
-import Close2SVG from './svg/close-2.svg'
 
-function Navbar({query, currentNote, notes, showSearch, tab, text, deletePhase, setCurrentNote, setNotes, setSearch, setTab, setText, setQuery, setDeletePhase}) {
+function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNote, setNotes, setSearch, setTab, setText, setQuery}) {
     useEffect(() => {
         if(notes.length < 3) {
             setQuery('')
@@ -101,7 +100,7 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, deletePhase, 
 
             {/* Nav Buttons */}
             <div className="center">
-                {((!showSearch && tab === 'NOTES-CONTAINER') || (!showSearch && tab === 'TASKS-CONTAINER')) && !deletePhase &&
+                {((!showSearch && tab === 'NOTES-CONTAINER') || (!showSearch && tab === 'TASKS-CONTAINER')) &&
                 <> 
                     <CustomButton name="NOTES-CONTAINER" 
                         className='btn-container' 
@@ -141,11 +140,7 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, deletePhase, 
                     {tab === 'EDITOR' && 
                     <CustomButton className="btn-container" 
                         type="img" value={SaveSVG} 
-                        eventHandlers={{onClick: () => saveNote()}}/>}
-                    {tab === 'NOTES-CONTAINER' && deletePhase && 
-                    <CustomButton className="btn-container" 
-                        type="img" value={Close2SVG} 
-                        eventHandlers={{onClick: () => setDeletePhase(false)}}/>}       
+                        eventHandlers={{onClick: () => saveNote()}}/>}   
             </div>
         </nav>
 

@@ -76,7 +76,7 @@
 }
 
 .float-message-container > ul > li {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
@@ -100,8 +100,8 @@
 
 /* Track */
 .definition::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px #d4d4d44d;
+  box-shadow: inset 0 0 6px #d4d4d44d;
   -webkit-border-radius: 10px;
   border-radius: 20px;
 }
