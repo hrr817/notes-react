@@ -12,5 +12,5 @@ It uses Dictionary API, to get the meaning for the word.
 When viewing note, click on any word to get its meaning.
 
 # Netlify Deploy
-https://practical-aryabhata-b00d73.netlify.app/
+https://notes-react-app-hrr817.netlify.app/
 
