@@ -6,7 +6,8 @@ import InputText from './Component/InputText'
 /* Stylesheet/CSS */
 import './Navbar.css'
 
-/* SVGS */
+
+/* SVG */
 import NoteSVG from './svg/note.svg'
 import TaskSVG from './svg/task.svg'
 import SearchSVG from './svg/search.svg'
@@ -15,7 +16,24 @@ import SaveSVG from './svg/save.svg'
 import EditSVG from './svg/edit.svg'
 import CloseSVG from './svg/close.svg'
 
+/* Cache Image Files */
+const noteIcon = new Image()
+noteIcon.src = NoteSVG
+const taskIcon = new Image()
+taskIcon.src = TaskSVG
+const searchIcon = new Image()
+searchIcon.src = SearchSVG
+const trashIcon = new Image()
+trashIcon.src = TrashSVG
+const saveIcon = new Image()
+saveIcon.src = SaveSVG
+const editIcon = new Image()
+editIcon.src = EditSVG
+const closeIcon = new Image()
+closeIcon.src = CloseSVG
+
 function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNote, setNotes, setSearch, setTab, setText, setQuery}) {
+    
     useEffect(() => {
         if(notes.length < 3) {
             setQuery('')
@@ -105,12 +123,12 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
                     <CustomButton name="NOTES-CONTAINER" 
                         className='btn-container' 
                         type="img" 
-                        value={NoteSVG} 
+                        value={noteIcon.src} 
                         eventHandlers={NavButtonEvents}/>
                     <CustomButton name="TASKS-CONTAINER" 
                         className="btn-container" 
                         type="img" 
-                        value={TaskSVG} 
+                        value={taskIcon.src} 
                         eventHandlers={NavButtonEvents}/>
                     
                 </>}
@@ -124,22 +142,22 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
                 {((notes.length > 2 && (tab === 'NOTES-CONTAINER' || tab === 'TASKS-CONTAINER'))) &&  
                         <CustomButton className='btn-container' 
                             type="img" 
-                            value={showSearch? CloseSVG : SearchSVG} 
+                            value={showSearch? closeIcon.src : searchIcon.src} 
                             eventHandlers={SearchButtonEvents}/>}                           
                 </div>
 
                 {/* Extra Buttons */}
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
-                        type="img" value={EditSVG} 
+                        type="img" value={editIcon.src} 
                         eventHandlers={{onClick: () => editNote()}}/>}
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
-                        type="img" value={TrashSVG} 
+                        type="img" value={trashIcon.src} 
                         eventHandlers={{onClick: () => deleteNote()}}/>}
                     {tab === 'EDITOR' && 
                     <CustomButton className="btn-container" 
-                        type="img" value={SaveSVG} 
+                        type="img" value={saveIcon.src} 
                         eventHandlers={{onClick: () => saveNote()}}/>}   
             </div>
         </nav>
