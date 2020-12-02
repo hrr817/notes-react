@@ -1,0 +1,67 @@
+@font-face {
+  font-family: Quicksand;
+  src: url(../font/Quicksand/static/Quicksand-Regular.ttf);
+}
+
+.task-box {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: auto;
+  max-width: 92%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  margin: 1rem;
+  border: 1px solid #1a1a1a98;
+  border-radius: 0.8rem;
+  height: auto;
+}
+
+.done {
+  opacity: 0.5;
+}
+
+.task-box > .checkbox {
+  display: flex;
+  grid-area: c;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.task-box > .checkbox > input[type="checkbox"] {
+  appearance: none;
+  cursor: pointer;
+  padding: 0.7rem;
+  margin: 0.3rem;
+  border: 1px solid #1a1a1ad0;
+  border-radius: 50%;
+  outline: none;
+}
+
+.task-box > .checkbox > input[type="checkbox"]:checked {
+  background: #000000da;
+}
+
+.task-box > .text {
+  text-align: left;
+  font-size: 1.4rem;
+  font-family: Quicksand, "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: #000000;
+  overflow: hidden;
+  padding: 0 0.4rem;
+  white-space: nowrap;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.task-box > .delete > button {
+  cursor: pointer;
+  outline: none;
+  font-size: 2rem;
+  border: none;
+  background: transparent;
+}

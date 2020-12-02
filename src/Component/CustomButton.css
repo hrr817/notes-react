@@ -1,0 +1,19 @@
+.btn-container {
+  padding: 0.2rem;
+}
+
+.btn-container > button {
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  height: 4em;
+  width: 4em;
+}
+
+@media (min-width: 1080px) {
+  .btn-container > button {
+    height: 5em;
+    width: 5em;
+  }
+}

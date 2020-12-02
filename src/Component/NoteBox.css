@@ -1,0 +1,87 @@
+.note-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  max-height: 200px;
+  margin: 1rem;
+  margin-bottom: 0rem;
+  width: 100%;
+}
+
+.note-box-inside {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  width: auto;
+  padding: 0 0.2em;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+}
+
+.note-box-inside > .para {
+  display: block;
+  overflow: hidden;
+  text-align: left;
+  font-family: Quicksand, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  white-space: pre-line;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  max-height: 130px;
+  margin: 0.5em;
+  color: #000000;
+}
+
+.note-box-inside > span {
+  font-family: Inconsolata, "Courier New", Courier, monospace;
+  font-size: 1.1rem;
+  text-align: right;
+  margin: 0;
+  padding: 0.3rem 1rem;
+  border-top: 1px solid #00000094;
+  color: #cecece;
+  background: #000000c9;
+  border-radius: 0.5em;
+}
+
+.note-box-inside > .icon {
+  display: inline-flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0rem;
+  right: 1rem;
+  margin: 0;
+  padding: 0.4em;
+  border-radius: 1em;
+  border: 1px solid #000000;
+  background: #fff;
+  cursor: pointer;
+}
+
+.note-box-inside > .icon > span {
+  display: block;
+  margin: 0;
+  width: 3em;
+  height: 3em;
+}
+
+.note-box-inside > .icon:hover {
+  background: #ffafaf;
+}
+
+@media only screen and (min-width: 550px) {
+  .note-box {
+    display: inline-flex;
+    max-width: 300px;
+    margin: 1rem 2rem;
+  }
+
+  .task-box {
+    display: inline-flex;
+    max-width: 400px;
+  }
+}
