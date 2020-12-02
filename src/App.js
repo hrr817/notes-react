@@ -33,7 +33,6 @@ function App() {
   const [query, changeQuery] = useState('')
   const [showSearch, changeSearch] = useState(false)
   const [currentNote, changeCurrentNote] = useState(null)
-  const [deletePhase, changeDeletePhase] = useState(false)
   const [floatWindow, changeFloatWindow] = useState(false)
 
   // Create Function Only Once, to prevent unnecessary renders
@@ -42,22 +41,16 @@ function App() {
   const setSearch = useCallback((val) => { changeSearch(val) }, [])
   const setCurrentNote = useCallback((val) => { changeCurrentNote(val) }, [])
   const setText = useCallback((val) => { changeText(val) }, [])
-  const setDeletePhase = useCallback((val) => { changeDeletePhase(val) }, [])
   const setFloatWindow = useCallback((val) => { changeFloatWindow(val) }, [])
 
   useEffect(() => {
     localStorage.setItem('data', JSON.stringify({tab: tab, NotesData: [...notes], TasksData: [...tasks]}))
   }, [notes, tasks, tab])
 
-  useEffect(() => {
-    if(notes.length === 0 || tab !== 'NOTES-CONTAINER') setDeletePhase(false)
-  }, [notes.length, tab, setDeletePhase])
-
   const showTab = () => {
     switch(tab){
       case 'NOTES-CONTAINER':
-        return <Notes notes={notes} query={query} deletePhase={deletePhase} setNotes={setNotes}
-        setTab={setTab} setCurrentNote={setCurrentNote} setDeletePhase={setDeletePhase}/>
+        return <Notes notes={notes} query={query} setTab={setTab} setCurrentNote={setCurrentNote}/>
       case 'TASKS-CONTAINER':
         return <Tasks tasks={tasks} query={query} floatWindow={floatWindow} setFloatWindow={setFloatWindow} setTasks={setTasks}/>
       case 'EDITOR':
@@ -73,9 +66,8 @@ function App() {
   return (
           <div className="app-grid">
             <Navbar query={query} currentNote={currentNote} notes={notes} showSearch={showSearch} 
-            tab={tab} text={text} deletePhase={deletePhase}
-            setCurrentNote={setCurrentNote} setNotes={setNotes} setSearch={setSearch} 
-            setTab={setTab} setText={setText} setQuery={setQuery} setDeletePhase={setDeletePhase}/>
+            tab={tab} text={text} setCurrentNote={setCurrentNote} setNotes={setNotes} setSearch={setSearch} 
+            setTab={setTab} setText={setText} setQuery={setQuery}/>
             <section> {showTab()} </section>
             <FloatButton tab={tab} floatWindow={floatWindow} 
               setTab={setTab} setCurrentNote={setCurrentNote} 
