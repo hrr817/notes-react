@@ -1,4 +1,5 @@
 import React from 'react'
+import {AnimatePresence, motion} from 'framer-motion'
 
 /* SVG */
 import CloseSVG from '../svg/close.svg'
@@ -33,31 +34,73 @@ const FloatButton= ({tab, floatWindow, setTab, setCurrentNote, setText, setFloat
                 setTab('NOTES-CONTAINER')
                 break;
             default:
-                console.log(tab + ' not found')
+                setTab('NOTES-CONTAINER')
                 break;
         }
 
     }
 
-    const iconUrl = () => {
-        switch(tab) {
-            case 'EDITOR':
-                return `url('${closeIcon.src}') center center no-repeat`
-            case 'VIEWER':
-                return `url('${backIcon.src}') center center no-repeat`
-            case 'NOTES-CONTAINER':
-                return floatWindow? `url('${backIcon.src}') center center no-repeat` : `url('${createIcon.src}') center center no-repeat`
-            case 'TASKS-CONTAINER':
-                return floatWindow? `url('${backIcon.src}') center center no-repeat` : `url('${addIcon.src}') center center no-repeat`
-            default:
-                console.log(tab + ' not found')
-                break
-        }
-    }
 
     return (
-        <div className="float-button-container" onClick={() => clickHandler()}>
-            <button style={{background: iconUrl()}}></button>
-        </div>)
+        <motion.div className="float-button-container" onClick={() => clickHandler()}
+        initial={{ y: 100}} 
+        animate={{ y: 0}}
+        exit={{ y: 100}}
+        whileTap={{ scale: 0.9 }}
+        transition={{type: 'spring', bounce: 0.1, mass: 1, stiffness: 55 }}>
+            <AnimatePresence>
+                {tab === 'EDITOR' && 
+                <motion.button style={{background: `url('${closeIcon.src}') center center no-repeat`}}
+                initial={{ opacity: 0, scale: 0}} 
+                animate={{ opacity: 1, scale: 1}}
+                exit={{ opacity: 0, scale: 0}}>
+                </motion.button> }
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {tab === 'VIEWER' && 
+                <motion.button style={{background: `url('${backIcon.src}') center center no-repeat`}}
+                initial={{ opacity: 0, scale: 0}} 
+                animate={{ opacity: 1, scale: 1}}
+                exit={{ opacity: 0, scale: 0}}>
+                </motion.button>}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {tab === 'NOTES-CONTAINER' && floatWindow && 
+                <motion.button style={{background: `url('${backIcon.src}') center center no-repeat`}}
+                initial={{ opacity: 0, scale: 0}} 
+                animate={{ opacity: 1, scale: 1}}
+                exit={{ opacity: 0, scale: 0}}>
+                </motion.button>}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {tab === 'NOTES-CONTAINER' && !floatWindow &&
+                <motion.button style={{background: `url('${createIcon.src}') center center no-repeat`}}
+                initial={{ opacity: 0, scale: 0}} 
+                animate={{ opacity: 1, scale: 1}}
+                exit={{ opacity: 0, scale: 0}}>
+                </motion.button>}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {tab === 'TASKS-CONTAINER' && floatWindow && 
+                <motion.button style={{background: `url('${backIcon.src}') center center no-repeat`}}
+                initial={{ opacity: 0, scale: 0}} 
+                animate={{ opacity: 1, scale: 1}}
+                exit={{ opacity: 0, scale: 0}}>
+                </motion.button>}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {tab === 'TASKS-CONTAINER' && !floatWindow &&
+                <motion.button style={{background: `url('${addIcon.src}') center center no-repeat`}}
+                initial={{ opacity: 0, scale: 0}} 
+                animate={{ opacity: 1, scale: 1}}
+                exit={{ opacity: 0, scale: 0}}>
+                </motion.button>}
+            </AnimatePresence>
+        </motion.div>)
 }
 export default React.memo(FloatButton)

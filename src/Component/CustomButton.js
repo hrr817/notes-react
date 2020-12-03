@@ -1,59 +1,25 @@
-import React, {useEffect} from 'react'
+import React from 'react'
+import {motion} from 'framer-motion'
 import './CustomButton.css'
 
-const defaultAnim = {
-    to: {
-        opacity: 1
-    },
-    from: {
-        opacity: 0
-    },
-    hover: {
-        to: {opacity: 0.85},
-        from: {opacity: 1}
-    },
-    reset: {
-        to: {opacity: 1}
-    },
-    config: {mass: 1, tension: 150, friction: 14}
-}
-
-function CustomButton( { className = "default-button", type = "text", value = "Button", alt = "Image", size=['1rem', '1rem'], eventHandlers = {}, anim = defaultAnim, name = "" } ) {
-    useEffect(() => {
-        // do something here
-    }, []);
+function CustomButton( { className = "default-button", type = "text", value = "Button", alt = "Image", size=['1rem', '1rem'], eventHandlers = {}, name = "" } ) {
 
     const buttonStyle = {
         background: 'url('+value+') center center no-repeat'
     }
 
-    const {onClick, onMouseEnter, onMouseLeave} = eventHandlers
-
-    const clickAnim = e =>  { 
-        // do something here
-        
-        if(onClick !== undefined) onClick(e)
-    }
-
-    const hoverAnim = e => {      
-        // do something here
-
-        if(onMouseEnter !== undefined) onMouseEnter(e)
-    }
-
-    const resetStyle = e => {    
-        // do something here
-
-        if(onMouseLeave !== undefined) onMouseLeave(e)
-    }
-
-    const events = {'onClick': clickAnim, 'onMouseEnter': hoverAnim, 'onMouseLeave': resetStyle}
     return (    
-        <div className={className}>
-            <button name={name} {...events} style={buttonStyle}> 
+        <motion.div className={className}
+        initial={{ y: -200 }} 
+        animate={{ y: 0 }}
+        exit={{ y: -200 }}
+        whileTap={{scale: 0.9}}
+        whileHover={{scale: 1.1}}
+        transition={{type: 'spring', bounce: 0.1, mass: 0.8, stiffness: 50 }}>
+            <button name={name} {...eventHandlers} style={buttonStyle}> 
             { type === 'text' && value}
             </button>
-        </div>
+        </motion.div>
     )
 }
 

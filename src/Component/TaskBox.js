@@ -1,7 +1,8 @@
 import React from 'react'
+import {motion} from 'framer-motion'
 import './TaskBox.css'
 
-const TaskBox = ({data, tasks, setTasks}) =>  {
+const TaskBox = ({data, tasks, setTasks, delay}) =>  {
     const {id, done, text, created} = data
 
     const changeHandler = () => {
@@ -39,11 +40,14 @@ const TaskBox = ({data, tasks, setTasks}) =>  {
     }
 
     return (
-        <div className={`task-box ${done && 'done'}`}>
+        <motion.div className={`task-box ${done && 'done'}`}
+        exit={{ opacity: 0, scale: 0}}
+        whileTap={{scale: 0.9}}
+        transition={{type: 'spring', damping: 15, mass: 1, stiffness: 60, delay: delay}}>
             <span className="checkbox"> <input type="checkbox" onChange={(e) => changeHandler(e)} checked={done}/> </span>
             <span className="text"> {text} </span>
             <span className="delete"> <button onClick={() => removeTask()}> × </button> </span>
-        </div>
+        </motion.div>
     )
 }
 
