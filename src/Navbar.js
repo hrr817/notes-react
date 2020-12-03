@@ -158,18 +158,25 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
                 </div>
 
                 {/* Extra Buttons */}
+                <AnimatePresence>
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
                         type="img" value={editIcon.src} 
-                        eventHandlers={{onClick: editNote}}/>}
+                        eventHandlers={{onClick: editNote}}/>}  
+                </AnimatePresence>
+
+                <AnimatePresence>
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
                         type="img" value={trashIcon.src} 
                         eventHandlers={{onClick: deleteNote}}/>}
+                </AnimatePresence>
+                <AnimatePresence>
                     {tab === 'EDITOR' && 
                     <CustomButton className="btn-container" 
                         type="img" value={saveIcon.src} 
                         eventHandlers={{onClick: saveNote}}/>}   
+                </AnimatePresence>
             </div>
         </nav> 
         )
