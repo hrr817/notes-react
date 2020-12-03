@@ -5,7 +5,7 @@ import {motion} from 'framer-motion'
 function NoteBox({data, setTab, setCurrentNote, delay}) {
     const {id, text, date} = data
 
-    const onClick = () => {
+    const clickHandler = () => {
         setCurrentNote({id, text, date})
         setTab('VIEWER')
     }
@@ -17,7 +17,7 @@ function NoteBox({data, setTab, setCurrentNote, delay}) {
         exit={{ opacity: 0, x: '-100vw', scale: 0}}
         whileTap={{scale: 0.9}}
         transition={{type: 'spring', damping: 15, mass: 1, stiffness: 60, delay: delay}}>
-            <div className="note-box-inside" onClick={() => onClick()}> 
+            <div className="note-box-inside" onClick={() => clickHandler()}> 
                 <pre className="para">
                     {text} 
                 </pre>
