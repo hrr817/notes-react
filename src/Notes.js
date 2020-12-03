@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {motion} from 'framer-motion'
+import {motion, AnimatePresence} from 'framer-motion'
 import NoteBox from './Component/NoteBox'
 
 function Notes({notes, query, setTab, setCurrentNote}) {
@@ -27,10 +27,12 @@ function Notes({notes, query, setTab, setCurrentNote}) {
                 <span>You have not made any notes</span> 
                 </motion.div>}
 
+                <AnimatePresence>
                 {notes.length !== 0 && sortedNotes.map(data => {
                     return <NoteBox key={data.id} data={data} 
                     setTab={setTab} setCurrentNote={setCurrentNote} delay={delay += 0.15}/>
                     })}
+                </AnimatePresence>    
             </motion.div>
     )
 }

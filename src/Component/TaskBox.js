@@ -41,6 +41,8 @@ const TaskBox = ({data, tasks, setTasks, delay}) =>  {
 
     return (
         <motion.div className={`task-box ${done && 'done'}`}
+        initial={{ opacity: 0, scale: 0}}
+        animate={{ opacity: 1, scale: 1}}
         exit={{ opacity: 0, scale: 0}}
         whileTap={{scale: 0.9}}
         transition={{type: 'spring', damping: 15, mass: 1, stiffness: 60, delay: delay}}>
