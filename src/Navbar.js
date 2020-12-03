@@ -119,27 +119,29 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
     return (
         <nav>
             {/* Nav Buttons */}
-                <AnimatePresence>
-                <div>
-                {((!showSearch && tab === 'NOTES-CONTAINER') || (!showSearch && tab === 'TASKS-CONTAINER')) &&
-                <motion.div style={{display: 'flex', flexDirection:'row'}}
-                initial={{ opacity: 0, y: -200 }} 
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -200 }}
-                transition={easeTransition} > 
-                    <CustomButton name="NOTES-CONTAINER" 
-                        className='btn-container' 
-                        type="img" 
-                        value={noteIcon.src} 
-                        eventHandlers={{onClick: tabChange}}/>
-                    <CustomButton name="TASKS-CONTAINER" 
-                        className="btn-container" 
-                        type="img" 
-                        value={taskIcon.src} 
-                        eventHandlers={{onClick: tabChange}}/>
-                </motion.div> }
-                </div>
-                </AnimatePresence>
+            <div className="space"></div>
+
+            <div className="center">
+            <AnimatePresence>
+            {((!showSearch && tab === 'NOTES-CONTAINER') || (!showSearch && tab === 'TASKS-CONTAINER')) &&
+            <motion.div style={{display: 'flex', flexDirection:'row'}}
+            initial={{ opacity: 0, y: -200 }} 
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -200 }}
+            transition={easeTransition} > 
+                <CustomButton name="NOTES-CONTAINER" 
+                    className='btn-container' 
+                    type="img" 
+                    value={noteIcon.src} 
+                    eventHandlers={{onClick: tabChange}}/>
+                <CustomButton name="TASKS-CONTAINER" 
+                    className="btn-container" 
+                    type="img" 
+                    value={taskIcon.src} 
+                    eventHandlers={{onClick: tabChange}}/>
+            </motion.div> }
+            </AnimatePresence>
+            </div>
 
             <div className="right">
                 <div className="search-container">
@@ -159,20 +161,22 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
 
                 {/* Extra Buttons */}
                 <AnimatePresence>
-                    <div style={{display:'flex', flexDirection:'row'}}>
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
                         type="img" value={editIcon.src} 
-                        eventHandlers={{onClick: editNote}}/>}  
+                        eventHandlers={{onClick: editNote}}/>}
+                </AnimatePresence>
+                <AnimatePresence>
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
                         type="img" value={trashIcon.src} 
                         eventHandlers={{onClick: deleteNote}}/>}
+                </AnimatePresence>
+                <AnimatePresence>
                     {tab === 'EDITOR' && 
                     <CustomButton className="btn-container" 
                         type="img" value={saveIcon.src} 
                         eventHandlers={{onClick: saveNote}}/>}
-                    </div> 
                 </AnimatePresence>
             </div>
         </nav> 

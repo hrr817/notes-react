@@ -48,9 +48,13 @@
 
 nav {
   grid-area: h;
-  position: sticky;
+  position: relative;
   top: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "l c r";
   justify-content: center;
   align-items: center;
   padding: 1rem 0 0 0;
@@ -58,10 +62,22 @@ nav {
   z-index: 80;
 }
 
-nav > .right {
+nav > .space {
+  grid-area: l;
+}
+
+nav > .center {
+  grid-area: c;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+nav > .right {
+  grid-area: r;
+  display: flex; /* 
   position: absolute;
-  right: 0;
+  right: 0; */
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
@@ -69,6 +85,8 @@ nav > .right {
 }
 
 nav > .right > .search-container {
+  position: absolute;
+  right: 0.7em;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
