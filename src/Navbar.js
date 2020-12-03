@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import { motion, AnimatePresence } from "framer-motion"
 import uuid from 'react-uuid'
 import CustomButton from './Component/CustomButton'
 import InputText from './Component/InputText'
@@ -32,7 +33,7 @@ editIcon.src = EditSVG
 const closeIcon = new Image()
 closeIcon.src = CloseSVG
 
-function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNote, setNotes, setSearch, setTab, setText, setQuery}) {
+function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNote, setNotes, setSearch, setTab, setText, setQuery, setPlaceholderForNotes}) {
     
     useEffect(() => {
         if(notes.length < 3) {
@@ -45,8 +46,7 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
         if(showSearch === false) setQuery('')
     }, [showSearch, setQuery]);
 
-    const clickHandler = e => {
-        e.preventDefault()
+    const tabChange = e => {
         const tab = e.target.name
         setTab(tab)
     }
@@ -85,7 +85,10 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
     }
 
     const saveNote = () => {
-        if(text === '') return
+        if(text === '') {
+            setPlaceholderForNotes('Try writing something...')
+            return
+        }
 
         let newArray = [...notes]
         let note = null
@@ -102,68 +105,72 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
         }
 
         newArray.push(note)
+        setPlaceholderForNotes('')
         setNotes(newArray)
         setText('')
         setCurrentNote(null)
         setTab('NOTES-CONTAINER')
     }
 
-
-    const NavButtonEvents = {onClick: clickHandler}
     const SearchButtonEvents = {onClick: () => setSearch(!showSearch)}
+
+    const easeTransition = {type: 'spring', bounce: 0.1, mass: 0.8, stiffness: 50 }
 
     return (
         <nav>
-            <div> {/* Blank div */} </div>
-
             {/* Nav Buttons */}
-            <div className="center">
+                <AnimatePresence>
                 {((!showSearch && tab === 'NOTES-CONTAINER') || (!showSearch && tab === 'TASKS-CONTAINER')) &&
-                <> 
+                <motion.div style={{display: 'flex', flexDirection:'row'}}
+                initial={{ opacity: 0, y: -200 }} 
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -200 }}
+                transition={easeTransition} > 
                     <CustomButton name="NOTES-CONTAINER" 
                         className='btn-container' 
                         type="img" 
                         value={noteIcon.src} 
-                        eventHandlers={NavButtonEvents}/>
+                        eventHandlers={{onClick: tabChange}}/>
                     <CustomButton name="TASKS-CONTAINER" 
                         className="btn-container" 
                         type="img" 
                         value={taskIcon.src} 
-                        eventHandlers={NavButtonEvents}/>
-                    
-                </>}
-            </div>
+                        eventHandlers={{onClick: tabChange}}/>
+                </motion.div> }
+                </AnimatePresence>
 
             <div className="right">
                 <div className="search-container">
                 {/* Search Input */}
+                <AnimatePresence>
                 {((showSearch && (notes.length > 2) && (tab === 'NOTES-CONTAINER' || tab === 'TASKS-CONTAINER'))) && 
                 <InputText query={query} setQuery={setQuery}/>}
+                </AnimatePresence>
+                <AnimatePresence>
                 {((notes.length > 2 && (tab === 'NOTES-CONTAINER' || tab === 'TASKS-CONTAINER'))) &&  
                         <CustomButton className='btn-container' 
                             type="img" 
                             value={showSearch? closeIcon.src : searchIcon.src} 
-                            eventHandlers={SearchButtonEvents}/>}                           
+                            eventHandlers={SearchButtonEvents}/>}
+                </AnimatePresence>                         
                 </div>
 
                 {/* Extra Buttons */}
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
                         type="img" value={editIcon.src} 
-                        eventHandlers={{onClick: () => editNote()}}/>}
+                        eventHandlers={{onClick: editNote}}/>}
                     {tab === 'VIEWER' && 
                     <CustomButton className="btn-container" 
                         type="img" value={trashIcon.src} 
-                        eventHandlers={{onClick: () => deleteNote()}}/>}
+                        eventHandlers={{onClick: deleteNote}}/>}
                     {tab === 'EDITOR' && 
                     <CustomButton className="btn-container" 
                         type="img" value={saveIcon.src} 
-                        eventHandlers={{onClick: () => saveNote()}}/>}   
+                        eventHandlers={{onClick: saveNote}}/>}   
             </div>
-        </nav>
-
-        /* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */
-    )
+        </nav> 
+        )
 }
 
 export default React.memo(Navbar)

@@ -1,5 +1,5 @@
 .float-box-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -11,10 +11,10 @@
   z-index: 99;
 }
 
-.float-box-container > textarea {
+.float-box-container > div > textarea {
   outline: none;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   padding: 1rem;
   font-family: Quicksand, "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
@@ -26,10 +26,10 @@
   height: 20vh;
   overflow: hidden;
   overflow-y: auto;
-  box-shadow: 0px 0px 3px 1px rgba(56, 56, 56, 0.185);
+  box-shadow: 0px 0px 2px 1px rgba(56, 56, 56, 0.185);
 }
 
-.float-box-container > div {
+.float-box-container > div > .add-button-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -37,23 +37,26 @@
   margin: 1rem;
 }
 
-.float-box-container > div > button {
+.float-box-container > div > .add-button-container > button {
   cursor: pointer;
   outline: none;
   padding: 0.5rem 1rem;
   color: #1d1d1d;
   border: none;
-  border-radius: 0.93rem;
+  border-radius: 0.5rem;
   background: #fffffff2;
   font-size: 1.4rem;
+  font-family: Quicksand, "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: bold;
   border: none /* 1px solid #c7c7c7 */;
-  box-shadow: 0px 0px 3px 1px rgba(56, 56, 56, 0.185);
+  box-shadow: 0px 0px 2px 1px rgba(56, 56, 56, 0.185);
 }
 
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   .float-box-container {
-    -webkit-backdrop-filter: blur(35px);
-    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
     background-color: rgba(255, 255, 255, 0);
   }
 }

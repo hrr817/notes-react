@@ -40,30 +40,21 @@
 
 nav {
   grid-area: h;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-template-areas: ". center right";
-  padding: 1.2rem 0 0 0;
-}
-
-nav > .center {
-  grid-area: "center";
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  position: relative;
+  padding: 1rem 0 0 0;
+  min-height: 12vh;
 }
 
 nav > .right {
-  grid-area: "right";
   display: flex;
+  position: absolute;
+  right: 0;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
   padding-right: 1rem;
 }
 
@@ -72,12 +63,12 @@ nav > .right > .search-container {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
 }
 
 .app-grid > section {
   grid-area: c;
   display: flex;
+  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
   justify-content: center;
@@ -129,6 +120,8 @@ nav > .right > .search-container {
   border-left: 0.01rem solid #2020204d;
   border-right: 0.01rem solid #2020204d;
   border-radius: 1rem;
+  height: 4rem;
+  width: 4rem;
   -webkit-box-shadow: 0px 1.5px 1px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 1.5px 1px -1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 1.5px 1px -1px rgba(0, 0, 0, 0.75);
@@ -137,9 +130,11 @@ nav > .right > .search-container {
 
 .app-grid > .float-button-container > button {
   display: inline-block;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
   outline: none;
-  height: 4rem;
-  width: 4rem;
   padding: 1rem;
   appearance: none;
   border: none;
@@ -149,6 +144,8 @@ nav > .right > .search-container {
 
 .notes-container {
   display: flex;
+  position: absolute;
+  top: 0;
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -172,6 +169,9 @@ nav > .right > .search-container {
 }
 
 .editor {
+  display: block;
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
 }

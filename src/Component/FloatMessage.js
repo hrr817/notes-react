@@ -1,32 +1,27 @@
-import React, {Fragment, useEffect} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
+import {motion} from 'framer-motion'
 import uuid from 'react-uuid'
-
 import './FloatMessage.css'
 
-const FloatMessage = ({isLoading, wordData, setWordData, setShowMessage}) =>  {
-
-
-    const [show, setShow] = React.useState('ERROR')
+const FloatMessage = ({wordData, resetWordData, setShowMessage}) =>  {
     const [audioUrl, setAudioUrl] = React.useState(null)
-    
+    const [isError, setError] = useState(false)
     let audio = undefined
 
     useEffect(() => {
+        // Definition not found
+        if(wordData['title']){
+            setError(true)
+        }
+        if(!wordData['title'] && wordData.length !== 0 && wordData.phonetics.length !== 0) {
+            // No error, found audio url
+            setAudioUrl(wordData.phonetics[0].audio)
+        }
         // Clean up wordData after use
         return () => {
-            setWordData([])
+            resetWordData()
         }
     }, [])
-
-    useEffect(() => {
-        if(wordData.word) {
-            setShow('MEANING')
-            if(wordData.length !== 0 && wordData.phonetics.length !== 0) setAudioUrl(wordData.phonetics[0].audio)
-        } else {
-            setShow('ERROR')
-        } 
-
-    }, [wordData])
 
     const play = () => {
         audio = document.getElementById('myAudio')
@@ -36,58 +31,45 @@ const FloatMessage = ({isLoading, wordData, setWordData, setShowMessage}) =>  {
         }
     }
 
-    const display = (show) => {
-        switch(show){
-            case 'ERROR':
-                return (
-                    <div className="float-message-container">
-                        {isLoading? <>Loading...</> : <>
-                        <div className="head">
-                            <div className="word">
-                                <span> {wordData.title} </span>
-                            </div>
-                        </div>
-                        <div className="definition">
-                            {wordData.resolution}
-                        </div></>}
-                        <div className="close-button" onClick={() => setShowMessage(false)}><button/></div> 
-                    </div>
-                )
-            case 'MEANING':
-                return (
-                <div className="float-message-container">
-                    {isLoading? <>Loading...</> : <>
-                    <div className="head">
-                        <div className="word" id="word">
-                            <span> {wordData.word} </span>
-                            {wordData.phonetics.length !== 0 && <>
-                                <audio id="myAudio">
-                                <source src={audioUrl} type="audio/mp3"/>
-                                </audio>
-                                <span className="button-container"> <button onClick={() => play()}/> </span>
-                            </>}
-                        </div>
-                        <div className="phonetic"> {wordData.phonetics.length !== 0 && wordData.phonetics[0].text} </div>
-                    </div>
-                    <ul className="definition">
-                    {wordData.meanings.map(m => 
-                        <Fragment key={uuid()}> 
-                            <span> {m.partOfSpeech} </span> 
-                            {m.definitions.map(d => 
-                                <li key={uuid()}> {d.definition} </li>
-                            )}
-                        </Fragment>)}
-                    </ul></>}
-                    <div className="close-button" onClick={() => setShowMessage(false)}><button/></div>
-                </div>
-                )    
-            default: 
-                return
-        }
-    }
-
     return (
-        display(show)
+        <motion.div className="float-message-container"
+        initial={{ opacity: 0, scale: 0}} 
+        animate={{ opacity: 1, scale: 1}}
+        exit={{ opacity: 0, scale: 0}}
+        transition={{type: 'spring', bounce: 0.1, mass: 1, stiffness: 55 }}>
+            {isError? 
+            <Fragment>
+                <div className="head"> <span className="word">{wordData.title}</span> </div>
+                <ul className="definition">
+                    <li>{wordData.resolution}</li>
+                </ul>
+            </Fragment> : 
+            <Fragment>
+                <div className="head">
+                    <span className="word" id="word">
+                        {!wordData['title'] && wordData.word}
+                        {!wordData['title'] && wordData.phonetics.length !== 0 && 
+                        <>
+                            <audio id="myAudio">
+                            <source src={audioUrl} type="audio/mp3"/>
+                            </audio>
+                            <span className="button-container"> <button onClick={() => play()}/> </span>
+                        </>}
+                    </span>
+                    <span className="phonetic"> {!wordData['title'] && wordData.phonetics.length !== 0 && wordData.phonetics[0].text} </span>
+                </div>
+                <ul className="definition">
+                {!wordData['title'] && wordData.meanings.map(m => 
+                    <Fragment key={uuid()}> 
+                        <span> {m.partOfSpeech} </span> 
+                        {m.definitions.map(d => 
+                            <li key={uuid()}> {d.definition} </li>
+                        )}
+                    </Fragment>)}
+                </ul>
+            </Fragment>}
+            <div className="close-button" onClick={() => setShowMessage(false)}><button/></div>
+        </motion.div>
     )
 }
 
