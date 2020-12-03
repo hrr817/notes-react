@@ -48,10 +48,11 @@
 
 nav {
   grid-area: h;
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   padding: 1rem 0 0 0;
   min-height: 12vh;
   z-index: 80;

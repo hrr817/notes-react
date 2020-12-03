@@ -120,6 +120,7 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
         <nav>
             {/* Nav Buttons */}
                 <AnimatePresence>
+                <div>
                 {((!showSearch && tab === 'NOTES-CONTAINER') || (!showSearch && tab === 'TASKS-CONTAINER')) &&
                 <motion.div style={{display: 'flex', flexDirection:'row'}}
                 initial={{ opacity: 0, y: -200 }} 
@@ -137,6 +138,7 @@ function Navbar({query, currentNote, notes, showSearch, tab, text, setCurrentNot
                         value={taskIcon.src} 
                         eventHandlers={{onClick: tabChange}}/>
                 </motion.div> }
+                </div>
                 </AnimatePresence>
 
             <div className="right">
