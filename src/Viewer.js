@@ -16,7 +16,9 @@ const fetchData = word => {
 
         axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${w}`, {method: 'GET'})
         .then(response => {
-            if(response.status === 200) resolve(response.data[0])
+            if(response.status === 200){
+                resolve(response.data[0])
+            }
         }).catch(() => resolve({"title":"No Definitions Found", "resolution":"You can try the search again at later time or head to the web instead."}))
     })
 }
@@ -29,7 +31,7 @@ function Viewer({currentNote: {date, text}}) {
 
     useEffect(() => {
         setWordsArray(text.split(' '))
-    }, []);
+    }, [setWordsArray, text]);
 
     const clickHandler = async (word) => {
         setLoading(true)
